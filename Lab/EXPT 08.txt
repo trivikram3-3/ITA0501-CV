@@ -1,0 +1,28 @@
+import cv2
+image = cv2.imread("image.jpg")
+
+if image is None:
+    print("Error: Image not found!")
+else:
+    gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (5, 5))
+    dilated_image = cv2.dilate(gray_image, kernel, iterations=1)
+    cv2.imshow("Original Image", gray_image)
+    cv2.imshow("Dilated Image", dilated_image)
+    cv2.imwrite("dilated_image.jpg", dilated_image)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
+import cv2
+image = cv2.imread("image.jpg")
+
+if image is None:
+    print("Error: Image not found!")
+else:
+    gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (5, 5))
+    dilated_image = cv2.dilate(gray_image, kernel, iterations=1)
+    cv2.imshow("Original Image", gray_image)
+    cv2.imshow("Dilated Image", dilated_image)
+    cv2.imwrite("dilated_image.jpg", dilated_image)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()

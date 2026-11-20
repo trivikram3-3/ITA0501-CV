@@ -1,0 +1,17 @@
+import cv2
+def analyze_histogram(image):
+    colors = ['Blue', 'Green', 'Red']
+    channels = [0, 1, 2]
+    for channel in channels:
+        histogram = cv2.calcHist([image], [channel], None, [256], [0, 256])
+        print(colors[channel], "Channel")
+        print("Minimum intensity:", histogram.argmin())
+        print("Maximum intensity:", histogram.argmax())
+    cv2.imshow("Input Image", image)
+image = cv2.imread("image.jpg")
+if image is None:
+    print("Error: Image not found!")
+else:
+    analyze_histogram(image)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()

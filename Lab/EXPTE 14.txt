@@ -1,0 +1,29 @@
+import cv2
+import numpy as np
+img = cv2.imread("image.jpg")
+if img is None:
+    print("Image not found!")
+else:
+    rows, cols = img.shape[:2]
+    # Four points in the original image
+    pts1 = np.float32([
+        [0, 0],
+        [cols - 1, 0],
+        [0, rows - 1],
+        [cols - 1, rows - 1]
+    ])
+    # Four points in the transformed image
+    pts2 = np.float32([
+        [50, 50],
+        [cols - 50, 0],
+        [0, rows - 50],
+        [cols - 1, rows - 1]
+    ])
+    # Calculate perspective transformation
+    matrix = cv2.getPerspectiveTransform(pts1, pts2)
+    # Apply transformation
+    result = cv2.warpPerspective(img, matrix, (cols, rows))
+    cv2.imshow("Original Image", img)
+    cv2.imshow("Perspective Transformation", result)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()

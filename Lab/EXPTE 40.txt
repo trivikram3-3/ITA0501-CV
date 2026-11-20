@@ -1,0 +1,28 @@
+import cv2
+import pytesseract
+
+cap = cv2.VideoCapture('video.mp4')
+
+text = ""
+
+while True:
+    ret, frame = cap.read()
+
+    if not ret:
+        break
+
+    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+
+    result = pytesseract.image_to_string(gray)
+
+    text = text + result
+
+cap.release()
+
+print("Extracted Text:")
+print(text)
+
+with open('text.txt', 'w') as f:
+    f.write(text)
+
+print("Text saved successfully")
